@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_KEYS = []
-for i in range(5):
+for i in range(4):
     api_key = os.getenv(f"API_KEY_{i+1}")
     API_KEYS.append(api_key)
     
@@ -52,31 +52,34 @@ def grade_writing(essay_text, API_KEYS):
         - **Band 1** Cannot use sentence forms at all.
         - **Band 0:** does not write any words; writes only a memorized respons
     ---
-    ## **Instructions for Evaluation**
-    - Carefully read the given essay and assess its **Organization, Vocabulary, and Grammar** using the detailed descriptors above.
-    - Assign band ranges with 1-point intervals from **0 to 10** for each criterion based on the essay’s overall performance.
-    - Ensure that your scoring aligns with the **VSTEP Writing rating scales** and reflects a **supportive and encouraging** evaluation approach.
+        ## **Instructions for Evaluation**
+        - Carefully read the given essay and assess its **Organization, Vocabulary, and Grammar** using the descriptors below.
+        - Assign band ranges with 1-point intervals from **0 to 10** for each criterion based on the essay’s **overall communication success, idea development, and language control**.
+        - Your scoring should reflect a **supportive, motivating, and learner-friendly** approach, aligned with the **spirit of the VSTEP Writing rating scales**, while promoting fairness and consistency.
 
-    ### **Encouraging & Fair Assessment**
-    - **Prioritize communicative effectiveness**: If errors in **Grammar** or **Vocabulary** do not significantly hinder understanding, **focus on the strengths** rather than the mistakes.
-    - **Acknowledge effort and idea clarity**: Essays that demonstrate **clear idea development and coherence** should be **rewarded generously**, even if they contain frequent minor errors.
-    - **Encourage risk-taking and complexity**: Essays that attempt **varied sentence structures and diverse vocabulary** should receive **higher scores**, even if occasional mistakes appear.
-    - **Minimize penalties for minor mistakes**: **Common learner errors** should not drastically lower scores unless they severely affect readability.
+        ### **Encouraging & Supportive Scoring Philosophy**
+        - **Focus on what the student can do** rather than what they cannot.
+        - If **Grammar** or **Vocabulary** errors **do not impede understanding**, emphasize the student's **intent and communicative success** over minor correctness issues.
+        - Reward essays that show **clear idea development, relevance to the topic, and logical structure**, even if there are frequent surface errors.
+        - Acknowledge and encourage attempts at **varied sentence structures, less common vocabulary**, and **creative expression**, even if imperfect.
+        - View errors as part of the **learning process**: do not let frequent but minor mistakes drastically reduce scores unless they **seriously block communication**.
 
-    ### **Balanced & Flexible Scoring**
-    - When in doubt, **opt for the higher band** if the essay shows **logical organization and idea progression**, despite some linguistic flaws.
-    - **Balance accuracy with fluency**: If an essay **effectively conveys ideas**, do not overly penalize for minor grammatical or lexical issues.
-    - If an essay contains **repetition, incoherence, or memorized responses**, reflect this in the **Organization** score, but still acknowledge any strengths.
-    - **Reward range and effort**: Essays that showcase **a variety of vocabulary and grammatical structures** should receive **credit for ambition**, even if errors occur.
-    - **Maintain flexibility and encouragement** in scoring to foster a **more human-like, fair, and motivating** evaluation process.
+        ### **Scoring Guidance**
+        - If the essay conveys **clear, logical ideas with sufficient development**, Organization should be rewarded generously — even if transitions or cohesion could be improved.
+        - Vocabulary scores should reflect both **range and appropriateness**. Favor essays that attempt to use topic-relevant or ambitious vocabulary, even if imperfect.
+        - Grammar scores should **prioritize clarity**: reward essays where the meaning is clear and there is evidence of control, even if tenses or word forms are inconsistent.
+        - When unsure between two bands, **choose the higher band** if the essay shows **effort, risk-taking, or communicative intent**.
+        - Avoid over-penalizing for repeated or common learner mistakes (e.g., articles, plural forms, basic prepositions) unless they **cause confusion**.
 
-    ### **Handling Minimal, or Underdeveloped Essays**
-    - If an essay is **under 60 words**, all three criteria (**Organization, Vocabulary, Grammar**) should receive **Band 0.5–1.0**, unless there is strong evidence to justify higher scores.
-    - **Vocabulary must not be rewarded** simply for being "mostly understandable." If the essay uses **only basic vocabulary**, includes **wrong word forms or word misuse**, and shows **no variety**, score it as **Band 1.0–3.0 at most**.
-    - **Grammar must not be given above Band 3.0** unless there are **multiple full, correctly structured sentences**. If only 1–2 correct sentences exist and the rest are flawed, treat the grammar ability as **extremely limited**.
-    - **Do not average scores upward** just because part of the text is readable. Unless the essay shows **clear control, variety, and development**, do not award mid-range bands.
-    - Remember: An essay is only meaningful for scoring if it shows **idea development, coherence, and evidence of language control**. Essays lacking these must be scored **harshly and consistently**.
-    ---
+        ### **Handling Minimal or Underdeveloped Essays**
+        - If an essay is **under 60 words**, scores may be limited to **Band 1.0**, unless there is **strong clarity and organization**.
+        - For essays that are very basic or show minimal control, still identify any **attempt at structure, topic relevance**, or complete ideas to award **Band 2.0–3.0**.
+        - Avoid giving **Band 0** unless the essay is **completely irrelevant, memorized, copied, or incomprehensible**.
+
+        ### **Tone and Purpose of Evaluation**
+        - Keep the evaluation **constructive** and **motivating** — aim to support the learner’s development rather than judge harshly.
+        - Maintain **flexibility and optimism** in scoring, especially when the learner shows **thoughtful engagement with the topic**.
+        - Ensure that your final scores reflect a balance between **language accuracy**, **idea communication**, and **student effort**.
     ### **Example 1**
     ### **Student's Essay:**
     *"there are many reasons i like this city. first, This is a beautiful city, have great beach in north city. it's a biggest city in area there. in the city, have many company, many buliding,..and we can coach jobs than earsy. with big city, it has many public transport. In here, people use public transport every day. city have ennergeer team, who alway fix teansport system when problem is bug. they are busy person, they spend most of time for computer, with key, with system problem. the second, city's people alway smile every time, every day so they love life here. Food in the city so great, also spycy but i like it and it very good with beer in city. sometime, I bought 1 ket beer for small party at house with may friends. I feel my life so preaty when i go to this city, every day when see in the sky with sea wind, i feel relax after tired day."*
@@ -323,7 +326,6 @@ def grade_writing(essay_text, API_KEYS):
       - Uses **cohesive devices effectively**: *"First of all,"* *"For example,"* *"Therefore,"* *"In conclusion."*
       - Paragraphing is mostly appropriate, though some transitions between ideas could be smoother.
       - **Score: 8.5**
-
       ---
 
       #### **2. Vocabulary:**
@@ -363,7 +365,7 @@ def grade_writing(essay_text, API_KEYS):
     for api_key in API_KEYS:
         try:
             genai.configure(api_key=api_key)
-            model = genai.GenerativeModel("models/gemini-2.0-pro-exp")
+            model = genai.GenerativeModel("models/gemini-2.5-pro-preview-03-25")
             response = model.generate_content(prompt, generation_config={"temperature": 0})
 
             if essay_text == "":
@@ -411,3 +413,11 @@ def extract_final_scores(text):
             scores[key] = score
 
     return "\n".join([f"{key}: {value}" for key, value in scores.items()])
+if __name__ == "__main__":
+    essay_text = """I agree young people are encouraged to take part in inpaid community servies in their free time to help the local community such as working for a charuty, improving the neighborhood or teaching sports to younger children because i think it is very good.
+    Current, i look young people have a lot of free time. Young people offen play game, drink beer, ... i konw it is bad.
+    People young can teach play to football to younger children because it needs a lot of people go to play at stadium. They have body is beautiful, heathy is very good. They can improve the neighborhood hardwork, our neighborhood is old, sometimes our neighborhood is very tired.
+    I agree they have active again, they should do not play game and drink beer."""
+    result = grade_writing(essay_text, API_KEYS)
+    final_scores = extract_final_scores(result)
+    print(final_scores)
